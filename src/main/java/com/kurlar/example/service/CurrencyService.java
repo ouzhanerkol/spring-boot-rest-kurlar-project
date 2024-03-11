@@ -1,15 +1,9 @@
 package com.kurlar.example.service;
 
-import com.kurlar.example.model.Banknote;
-import com.kurlar.example.model.Cross;
-import com.kurlar.example.model.Forex;
-import com.kurlar.example.model.Information;
-import com.kurlar.example.repository.BanknoteRepository;
-import com.kurlar.example.repository.CrossRepository;
-import com.kurlar.example.repository.ForexRepository;
-import com.kurlar.example.repository.InformationRepository;
+import com.kurlar.example.model.*;
+import com.kurlar.example.repository.*;
 import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,5 +50,14 @@ public class CurrencyService {
 
     public List<Information> getAllInformationByCurrencyCode(String currencyCode) {
         return informationRepository.findAllByCurrencyCode(currencyCode);
+    }
+
+    public List<Currency> getAllType() {
+        List<Currency> currencyList = new ArrayList<>();
+        currencyList.addAll(forexRepository.findAll());
+        currencyList.addAll(banknoteRepository.findAll());
+        currencyList.addAll(crossRepository.findAll());
+        currencyList.addAll(informationRepository.findAll());
+        return currencyList;
     }
 }

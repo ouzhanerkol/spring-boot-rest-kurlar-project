@@ -1,22 +1,20 @@
 package com.kurlar.example.controller;
 
-import com.kurlar.example.model.Banknote;
-import com.kurlar.example.model.Cross;
-import com.kurlar.example.model.Forex;
-import com.kurlar.example.model.Information;
+import com.kurlar.example.model.*;
 import com.kurlar.example.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
 public class CurrencyController {
-
     @Autowired
     private CurrencyService service;
+
+    @GetMapping("/getType")
+    public List<Currency> findAllType() {return service.getAllType();}
 
     @GetMapping("/getType/forex")
     public List<Forex> findForexByType() {
@@ -36,11 +34,6 @@ public class CurrencyController {
     @GetMapping("/getType/information")
     public List<Information> findInformationByType() {
         return service.getAllInformation();
-    }
-
-    @GetMapping("/getType")
-    public List<Forex> findAllByType() {
-        return service.getAllForex();
     }
 
     @GetMapping("/getCurrencyCode/forex/{currencyCode}")
